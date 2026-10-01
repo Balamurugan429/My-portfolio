@@ -88,7 +88,14 @@ export const AboutBento: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-2 glass glass-hover rounded-3xl p-8 space-y-6"
+            className="lg:col-span-2 glass glass-hover rounded-3xl p-8 space-y-6 cursor-pointer"
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+              e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+            }}
           >
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-electric-cyan/20 flex items-center justify-center flex-shrink-0">

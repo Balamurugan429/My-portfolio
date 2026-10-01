@@ -8,6 +8,7 @@ import { FeaturedProjects } from './components/sections/FeaturedProjects';
 import { SkillMatrix } from './components/sections/SkillMatrix';
 import { Timeline } from './components/sections/Timeline';
 import { ContactFooter } from './components/sections/ContactFooter';
+import { ScrollProgressBar } from './components/ui/ScrollProgressBar';
 import { useLenis } from './hooks/useLenis';
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
     <>
       {/* 3D Background Layer */}
       <SceneCanvas />
+
+      {/* Scroll Progress Bar */}
+      <ScrollProgressBar />
 
       {/* Interactive UI Layer */}
       <div className="relative z-10">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, ArrowUp, Copy, Check } from 'lucide-react';
+import canvasConfetti from 'canvas-confetti';
 import { PORTFOLIO_DATA } from '../../data/portfolioData';
 
 export const ContactFooter: React.FC = () => {
@@ -9,6 +10,7 @@ export const ContactFooter: React.FC = () => {
   const copyEmail = () => {
     navigator.clipboard.writeText(PORTFOLIO_DATA.personal.email);
     setEmailCopied(true);
+    canvasConfetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
     setTimeout(() => setEmailCopied(false), 2000);
   };
 
