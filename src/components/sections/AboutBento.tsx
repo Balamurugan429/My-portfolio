@@ -80,6 +80,15 @@ export const AboutBento: React.FC = () => {
           </h2>
         </motion.div>
 
+        {/* Transparent Academic Background */}
+        <div className="absolute inset-0 -z-10 pointer-events-none">
+          <img 
+            src="/academic-bg.png" 
+            alt="Subtle academic background" 
+            className="w-full h-full object-cover opacity-8 mix-blend-multiply"
+          />
+        </div>
+
         {/* Bento Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Card 1: Career & Academic Foundation - Spans 2 columns */}
