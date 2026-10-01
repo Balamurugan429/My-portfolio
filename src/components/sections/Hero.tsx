@@ -55,7 +55,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight bg-gradient-to-br from-white via-slate-200 to-electric-cyan/80 bg-clip-text text-transparent"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-br from-white via-slate-200 to-electric-cyan/80 bg-clip-text text-transparent uppercase"
           >
             {PORTFOLIO_DATA.personal.name}
           </motion.h1>
