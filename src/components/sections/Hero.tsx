@@ -135,7 +135,7 @@ export const Hero: React.FC = () => {
             {/* Profile Image */}
             <div className="aspect-square rounded-2xl overflow-hidden border border-white/10">
               <img 
-                src="/profile.jpg" 
+                src="/My-portfolio/profile.png" 
                 alt="Balamurugan P" 
                 className="w-full h-full object-cover"
               />
