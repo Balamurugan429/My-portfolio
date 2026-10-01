@@ -136,7 +136,7 @@ export const PORTFOLIO_DATA = {
     {
       year: "2025",
       title: "AI & Data Science Intern",
-      organization: "Intellipaat",
+      organization: "ApproTech Solutions",
       description: "Built production ML, NLP & BI pipelines",
       type: "work",
     },
