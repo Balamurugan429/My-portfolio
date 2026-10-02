@@ -30,7 +30,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
       <div className="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Column: Text Content */}
         <motion.div
