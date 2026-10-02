@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
+const base = import.meta.env.BASE_URL || '/';
 const bgImages = [
-  '/bg-hydro-rain.png',
-  '/bg-neural-amber.png',
-  '/bg-silk-waves.png',
+  `${base}bg-hydro-rain.png`,
+  `${base}bg-neural-amber.png`,
+  `${base}bg-silk-waves.png`,
 ];
 
 const sectionMap: Record<string, number> = {
@@ -16,47 +17,38 @@ const sectionMap: Record<string, number> = {
   contact: 0,
 };
 
-const transitionClass = 'transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]';
 
 export const CinematicBackground: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // Section reference for IntersectionObserver
-  const sectionRefs = useRef<Map<string, Element | null>>(new Map());
 
   // Observe all sections
   useEffect(() => {
     const sections = ['hero', 'about', 'research', 'projects', 'skills', 'journey', 'contact'];
     const observer = new IntersectionObserver(
       (entries) => {
-        let newestIndex = 0;
-
-        entries.forEach((entry, index) => {
-          const sectionName = sections[index];
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            newestIndex = sectionMap[sectionName] ?? 0;
+            const sectionName = entry.target.id;
+            const newIndex = sectionMap[sectionName] ?? 0;
+            setActiveIndex(newIndex);
           }
         });
-
-        if (newestIndex !== activeIndex) {
-          setActiveIndex(newestIndex);
-        }
       },
       {
-        rootMargin: '-20% 0%',
+        threshold: 0.2,
       }
     );
 
-    // Observe all sections
+    // Observe all sections by element ID
     sections.forEach((sectionName) => {
-      const element = sectionRefs.current.get(sectionName);
+      const element = document.getElementById(sectionName);
       if (element) {
         observer.observe(element);
       }
     });
 
     return () => observer.disconnect();
-  }, [activeIndex]);
+  }, []);
 
   // Ken Burns effect animation
   const [kenBurns, setKenBurns] = useState({
@@ -81,9 +73,9 @@ export const CinematicBackground: React.FC = () => {
     return () => {};
   }, []);
 
-  // Generate dark vignette overlay CSS for text readability
+  // Generate dark vignette overlay CSS for text readability while keeping background vivid
   const overlayStyle = {
-    backgroundImage: 'linear-gradient(to bottom, rgba(4,4,6,0.95) 0%, rgba(4,4,6,0.85) 50%, rgba(4,4,6,0.98) 100%)',
+    backgroundImage: 'linear-gradient(to bottom, rgba(4,4,6,0.6) 0%, rgba(4,4,6,0.4) 50%, rgba(4,4,6,0.75) 100%)',
   };
 
   // Generate subtle noise SVG pattern for depth
@@ -98,68 +90,65 @@ export const CinematicBackground: React.FC = () => {
     </svg>
   `;
 
-  // Map active index to background image
-  const bgImage = bgImages[activeIndex];
-
   return (
     <div
       style={{
         position: 'fixed',
         inset: 0,
         pointerEvents: 'none',
-        zIndex: -1,
+        zIndex: 0,
         overflow: 'hidden',
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        transition: 'background-image 1s ease-out',
+        backgroundColor: '#040406',
       }}
     >
-      {/* Layer 1: All 3 backgrounds cross-fading */}
+      {/* Layer 1: All 3 backgrounds cross-fading smoothly */}
       <div
         style={{
           position: 'absolute',
-          inset: 0,
+          inset: '-5%',
+          width: '110%',
+          height: '110%',
           backgroundImage: `url(${bgImages[0]})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: activeIndex === 0 ? 1 : 0,
-          scale: activeIndex === 0 ? 1.05 : 1,
-          transition: transitionClass,
+          opacity: activeIndex === 0 ? 0.9 : 0,
+          transform: `scale(${activeIndex === 0 ? kenBurns.scale : 1}) translate(${activeIndex === 0 ? kenBurns.translateX : 0}px, ${activeIndex === 0 ? kenBurns.translateY : 0}px)`,
+          transition: 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
           willChange: 'opacity, transform',
         }}
-        className="absolute inset-0 z-0"
       />
       <div
         style={{
           position: 'absolute',
-          inset: 0,
+          inset: '-5%',
+          width: '110%',
+          height: '110%',
           backgroundImage: `url(${bgImages[1]})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: activeIndex === 1 ? 1 : 0,
-          scale: activeIndex === 1 ? 1.05 : 1,
-          transition: transitionClass,
+          opacity: activeIndex === 1 ? 0.9 : 0,
+          transform: `scale(${activeIndex === 1 ? kenBurns.scale : 1}) translate(${activeIndex === 1 ? kenBurns.translateX : 0}px, ${activeIndex === 1 ? kenBurns.translateY : 0}px)`,
+          transition: 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
           willChange: 'opacity, transform',
         }}
-        className="absolute inset-0 z-0"
       />
       <div
         style={{
           position: 'absolute',
-          inset: 0,
+          inset: '-5%',
+          width: '110%',
+          height: '110%',
           backgroundImage: `url(${bgImages[2]})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: activeIndex === 2 ? 1 : 0,
-          scale: activeIndex === 2 ? 1.05 : 1,
-          transition: transitionClass,
+          opacity: activeIndex === 2 ? 0.9 : 0,
+          transform: `scale(${activeIndex === 2 ? kenBurns.scale : 1}) translate(${activeIndex === 2 ? kenBurns.translateX : 0}px, ${activeIndex === 2 ? kenBurns.translateY : 0}px)`,
+          transition: 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
           willChange: 'opacity, transform',
         }}
-        className="absolute inset-0 z-0"
       />
 
-      {/* Layer 2: Dark vignette overlay for text readability - CRITICAL */}
+      {/* Layer 2: Vignette overlay for text readability */}
       <div
         style={{
           ...overlayStyle,

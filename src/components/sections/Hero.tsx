@@ -104,7 +104,7 @@ export const Hero: React.FC = () => {
             </button>
 
             <a
-              href="/resume.pdf"
+              href={`${import.meta.env.BASE_URL || '/'}resume.pdf`}
               download
               className="px-6 py-3 rounded-full glass glass-hover border border-white/10 font-semibold flex items-center gap-2 hover:scale-105 transition-transform"
             >
@@ -135,7 +135,7 @@ export const Hero: React.FC = () => {
             {/* Profile Image */}
             <div className="aspect-square rounded-2xl overflow-hidden border border-white/10">
               <img 
-                src="/My-portfolio/profile.png" 
+                src={`${import.meta.env.BASE_URL || '/'}profile.png`} 
                 alt="Balamurugan P" 
                 className="w-full h-full object-cover"
               />

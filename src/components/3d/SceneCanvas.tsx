@@ -146,8 +146,6 @@ export const SceneCanvas: React.FC = () => {
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 2]}
       >
-        <color attach="background" args={['#040406']} />
-        <fog attach="fog" args={['#040406', 5, 20]} />
         <ParticleField mouseX={mousePosition.x} mouseY={mousePosition.y} />
       </Canvas>
     </div>

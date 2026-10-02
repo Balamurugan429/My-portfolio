@@ -80,14 +80,7 @@ export const AboutBento: React.FC = () => {
           </h2>
         </motion.div>
 
-        {/* Transparent Academic Background */}
-        <div className="absolute inset-0 -z-10 pointer-events-none">
-          <img 
-            src="/academic-bg.png" 
-            alt="Subtle academic background" 
-            className="w-full h-full object-cover opacity-8 mix-blend-multiply"
-          />
-        </div>
+
 
         {/* Bento Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -97,7 +90,7 @@ export const AboutBento: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-2 glass glass-hover rounded-3xl p-8 space-y-6 cursor-pointer"
+            className="lg:col-span-2 glass glass-hover rounded-3xl p-8 space-y-6 cursor-pointer relative overflow-hidden group"
             onMouseMove={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
               const x = e.clientX - rect.left;
@@ -106,6 +99,15 @@ export const AboutBento: React.FC = () => {
               e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
             }}
           >
+            {/* Saveetha Engineering College Campus Ambient Backdrop */}
+            <div className="absolute inset-0 -z-10 rounded-3xl overflow-hidden pointer-events-none">
+              <img 
+                src={`${import.meta.env.BASE_URL || '/'}academic-bg.png`} 
+                alt="Saveetha Engineering College Campus" 
+                className="w-full h-full object-cover opacity-20 group-hover:opacity-35 scale-100 group-hover:scale-105 transition-all duration-700 filter brightness-75"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-obsidian-950/95 via-obsidian-950/85 to-obsidian-950/70" />
+            </div>
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-electric-cyan/20 flex items-center justify-center flex-shrink-0">
                 <GraduationCap className="text-electric-cyan" size={24} />
