@@ -81,17 +81,17 @@ export const CinematicBackground: React.FC = () => {
     return () => {};
   }, []);
 
-  // Generate overlay gradient CSS
+  // Generate dark vignette overlay CSS for text readability
   const overlayStyle = {
-    backgroundImage: 'linear-gradient(to bottom, rgba(4,4,6,0.9) 0%, rgba(4,4,6,0.6) 50%, rgba(4,4,6,0.95) 100%)',
+    backgroundImage: 'linear-gradient(to bottom, rgba(4,4,6,0.95) 0%, rgba(4,4,6,0.85) 50%, rgba(4,4,6,0.98) 100%)',
   };
 
-  // Generate noise SVG pattern
+  // Generate subtle noise SVG pattern for depth
   const noiseSVG = `
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <rect width="100%" height="100%" fill="black"/>
       <filter id="noise">
-        <feTurbulence type="fractalNoise" baseFrequency="1.0" numOctaves="4" result="turbulence"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="turbulence"/>
         <feComposite in="SourceGraphic" in2="turbulence" operator="arithmetic"/>
       </filter>
       <rect width="100%" height="100%" fill="white" filter="url(#noise)"/>
@@ -107,11 +107,12 @@ export const CinematicBackground: React.FC = () => {
         position: 'fixed',
         inset: 0,
         pointerEvents: 'none',
-        zIndex: 0,
+        zIndex: -1,
         overflow: 'hidden',
         backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        transition: 'background-image 1s ease-out',
       }}
     >
       {/* Layer 1: All 3 backgrounds cross-fading */}
@@ -127,7 +128,7 @@ export const CinematicBackground: React.FC = () => {
           transition: transitionClass,
           willChange: 'opacity, transform',
         }}
-        className="absolute inset-0"
+        className="absolute inset-0 z-0"
       />
       <div
         style={{
@@ -141,7 +142,7 @@ export const CinematicBackground: React.FC = () => {
           transition: transitionClass,
           willChange: 'opacity, transform',
         }}
-        className="absolute inset-0"
+        className="absolute inset-0 z-0"
       />
       <div
         style={{
@@ -155,10 +156,10 @@ export const CinematicBackground: React.FC = () => {
           transition: transitionClass,
           willChange: 'opacity, transform',
         }}
-        className="absolute inset-0"
+        className="absolute inset-0 z-0"
       />
 
-      {/* Layer 2: Dark vignette overlay for text readability */}
+      {/* Layer 2: Dark vignette overlay for text readability - CRITICAL */}
       <div
         style={{
           ...overlayStyle,
@@ -191,7 +192,7 @@ export const CinematicBackground: React.FC = () => {
           backgroundImage: 'url("data:image/svg+xml;base64,' + btoa(noiseSVG) + '")',
           pointerEvents: 'none',
           zIndex: 3,
-          opacity: 0.02,
+          opacity: 0.03,
         }}
       />
     </div>

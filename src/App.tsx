@@ -16,7 +16,7 @@ function App() {
   useLenis();
 
   return (
-    <>
+    <div className="min-h-screen bg-transparent text-white relative">
       {/* Cinematic Background System - Root Layer */}
       <CinematicBackground />
 
@@ -41,7 +41,7 @@ function App() {
           <ContactFooter />
         </main>
       </div>
-    </>
+    </div>
   );
 }
 
