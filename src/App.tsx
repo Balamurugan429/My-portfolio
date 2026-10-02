@@ -9,6 +9,7 @@ import { SkillMatrix } from './components/sections/SkillMatrix';
 import { Timeline } from './components/sections/Timeline';
 import { ContactFooter } from './components/sections/ContactFooter';
 import { ScrollProgressBar } from './components/ui/ScrollProgressBar';
+import { CinematicBackground } from './components/ui/CinematicBackground';
 import { useLenis } from './hooks/useLenis';
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
 
   return (
     <>
+      {/* Cinematic Background System - Root Layer */}
+      <CinematicBackground />
+
       {/* 3D Background Layer */}
       <SceneCanvas />
 

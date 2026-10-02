@@ -73,3 +73,31 @@ body {
     box-shadow: 0 0 20px rgba(0, 245, 212, 0.2);
   }
 }
+
+/* Cinematic Background Animation */
+@keyframes bgDrift {
+  0%, 100% {
+    background-position: center top;
+  }
+  50% {
+    background-position: center bottom;
+  }
+}
+
+@keyframes bgPan {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(var(--bg-pan-x, 0), var(--bg-pan-y, 0));
+  }
+}
+
+@keyframes bgScale {
+  0%, 100% {
+    transform: scale(var(--bg-scale, 1));
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
