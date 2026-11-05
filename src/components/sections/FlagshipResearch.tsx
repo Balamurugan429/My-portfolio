@@ -1,247 +1,252 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Zap, Target, Brain, BarChart3 } from 'lucide-react';
+import { 
+  ExternalLink, 
+  Zap, 
+  BarChart3, 
+  Network, 
+  Database
+} from 'lucide-react';
 import { PORTFOLIO_DATA } from '../../data/portfolioData';
 
 const features = [
-  { name: 'Dynamic Extraction Rate', value: 38, color: '#00f5d4' },
-  { name: 'Seasonal Rainfall Index', value: 27, color: '#10b981' },
-  { name: 'Aquifer Transmissivity', value: 19, color: '#7b2cbf' },
-  { name: 'Historical Water Level Lag', value: 16, color: '#38bdf8' },
+  { name: 'Dynamic Extraction Rate', value: 38, color: '#00f5d4', desc: 'Normalized regional pumping rate vs recharge yield' },
+  { name: 'Seasonal Rainfall Index', value: 27, color: '#6366f1', desc: 'Monsoon precipitation with lag-14 soil infiltration' },
+  { name: 'Aquifer Transmissivity', value: 19, color: '#a855f7', desc: 'Hydraulic subsurface permeability & storage coefficient' },
+  { name: 'Historical Water Level Lag', value: 16, color: '#38bdf8', desc: 'Autoregressive seasonal baseline anchor' },
 ];
 
 export const FlagshipResearch: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'preprocessing' | 'ensemble' | 'explainability'>('preprocessing');
-  const [hoveredFeature, setHoveredFeature] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'preprocessing' | 'ensemble' | 'explainability'>('ensemble');
 
   const tabContent = {
     preprocessing: {
-      title: 'Extraction-Aware Preprocessing',
-      description: 'Dynamic seasonal recharge weighting that accounts for non-linear extraction patterns and temporal aquifer behavior.',
+      title: 'Extraction-Aware Preprocessing Engine',
+      badge: 'Feature Engineering Rigor',
+      description: 'Addresses non-linear seasonal recharge and dynamic extraction deficits without data leakage across temporal boundaries.',
       points: [
-        'Temporal feature engineering with lag variables',
-        'Extraction-rate weighted normalization',
-        'Seasonal recharge coefficient adjustment',
+        'Rolling temporal window engineering with 30-day and 90-day recharge lag vectors',
+        'Dynamic extraction-rate normalization weighted by local aquifer specific yield coefficients',
+        'Outlier clipping and robust scaling preserving critical extreme hydrogeological drought signals',
       ],
     },
     ensemble: {
-      title: 'Multi-Model Ensemble',
-      description: 'Hybrid pipeline combining XGBoost, LightGBM, and Random Forest with optimized weight distribution.',
+      title: 'Heterogeneous Multi-Model Ensemble',
+      badge: 'Architecture Specification',
+      description: 'Weighted combination of diverse gradient boosted trees and bagging regressors optimizing bias-variance trade-off.',
       points: [
-        'XGBoost (40% weight): Gradient boosting for non-linear patterns',
-        'LightGBM (35% weight): Fast, efficient leaf-wise growth',
-        'Random Forest (25% weight): Robust outlier handling',
+        'XGBoost (40% Weight): Captures high-frequency non-linear extraction gradient shifts',
+        'LightGBM (35% Weight): Leaf-wise deep tree growth minimizing mean absolute percentage error',
+        'Random Forest (25% Weight): Variance stabilizing bagging regressor preventing overfitting in drought tails',
       ],
     },
     explainability: {
-      title: 'SHAP & LIME Interpretability',
-      description: 'Post-hoc explainability layer providing transparent feature importance and prediction reasoning.',
+      title: 'Post-Hoc XAI (SHAP & LIME) Interpretability Layer',
+      badge: 'Explainable AI Integration',
+      description: 'Translates black-box ensemble decisions into verifiable scientific rationales required for municipal policy makers.',
       points: [
-        'SHAP TreeExplainer for global feature attribution',
-        'LIME for local prediction interpretation',
-        'Waterfall plots for stakeholder communication',
+        'SHAP TreeExplainer for exact mathematical calculation of Shapley marginal contributions',
+        'Global summary waterfall plots distinguishing anthropogenic extraction vs climate drought',
+        'LIME local surrogate approximations for high-risk single-borewell criticality alerts',
       ],
     },
   };
 
-  const featureDescriptions: Record<string, string> = {
-    'Dynamic Extraction Rate': 'Real-time extraction volume normalized by aquifer capacity',
-    'Seasonal Rainfall Index': 'Weighted precipitation with monsoon pattern adjustment',
-    'Aquifer Transmissivity': 'Geological permeability coefficient affecting recharge speed',
-    'Historical Water Level Lag': 'Previous month water table depth as temporal signal',
-  };
-
   return (
-    <section id="research" className="relative px-6 py-24 md:py-32">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
+    <section id="research" className="relative px-6 py-28 md:py-36 overflow-hidden">
+      <div className="max-w-7xl mx-auto space-y-16">
+        {/* Research Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 text-center"
+          className="text-center space-y-4 max-w-4xl mx-auto"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-electric-cyan/20 to-electric-purple/20 border border-electric-cyan/30 text-sm font-semibold mb-6">
-            <Zap size={16} className="text-electric-cyan" />
-            FLAGSHIP RESEARCH & ML ARCHITECTURE
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-electric-cyan/30 bg-electric-cyan/[0.04] text-xs font-mono text-electric-cyan tracking-wider uppercase">
+            <Zap size={14} className="text-electric-cyan" />
+            Flagship Research & Machine Learning Architecture
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-            {PORTFOLIO_DATA.flagshipProject.title}
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+            Explainable, Extraction-Aware Ensemble Learning for{' '}
+            <span className="bg-gradient-to-r from-electric-cyan via-blue-200 to-indigo-400 bg-clip-text text-transparent">
+              Groundwater Criticality Classification
+            </span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-            {PORTFOLIO_DATA.flagshipProject.description}
+          <p className="text-gray-400 text-base md:text-lg leading-relaxed">
+            A scientifically grounded machine learning system combining dual-stage regression and categorical risk indexing with explainable AI attribution.
           </p>
         </motion.div>
 
-        {/* Abstract */}
+        {/* Executive Benchmark Summary Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl"
+        >
+          {[
+            { label: 'Prediction Precision', val: '96.4%', sub: 'Test Set Evaluation', color: 'text-electric-cyan' },
+            { label: 'Goodness of Fit (R²)', val: '0.942', sub: 'Variance Explained', color: 'text-indigo-400' },
+            { label: 'Inference Latency', val: '< 15 ms', sub: 'Per Spatial Coordinate', color: 'text-emerald-400' },
+            { label: 'Explainability Model', val: 'SHAP + LIME', sub: 'Dual Post-Hoc XAI', color: 'text-purple-400' },
+          ].map((m) => (
+            <div key={m.label} className="p-5 rounded-2xl bg-obsidian-900/80 border border-white/5 space-y-1 text-center">
+              <div className={`text-3xl md:text-4xl font-bold font-mono ${m.color}`}>{m.val}</div>
+              <div className="text-xs font-semibold text-gray-200">{m.label}</div>
+              <div className="text-[10px] text-gray-500 font-mono">{m.sub}</div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Pipeline Architecture Interactive Diagram */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass rounded-3xl p-8 mb-12"
+          className="rounded-3xl p-8 bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl space-y-8"
         >
-          <div className="flex items-start gap-4">
-            <Target className="text-electric-cyan flex-shrink-0 mt-1" size={24} />
-            <div>
-              <h3 className="text-xl font-bold mb-3">Research Objectives</h3>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                This research addresses two critical challenges in hydrogeological forecasting: (1) accurate prediction of 
-                dynamic groundwater level fluctuations under variable extraction pressure, and (2) automated classification 
-                of regional criticality zones to guide sustainable water management policy.
-              </p>
-              <div className="grid md:grid-cols-2 gap-4">
-                {PORTFOLIO_DATA.flagshipProject.highlights.map((highlight, idx) => (
-                  <div key={idx} className="flex items-start gap-2">
-                    <div className="w-1.5 h-1.5 bg-electric-cyan rounded-full mt-2 flex-shrink-0" />
-                    <span className="text-sm text-gray-300">{highlight}</span>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06] pb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-500/[0.08] border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                <Network size={24} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Full-Stack ML Pipeline Flow</h3>
+                <p className="text-xs text-gray-400 font-mono">From Telemetry Ingestion to Explainable Criticality Output</p>
+              </div>
+            </div>
+            {/* Segmented Pipeline Control */}
+            <div className="inline-flex p-1 rounded-xl bg-obsidian-900/90 border border-white/10 text-xs">
+              {(['preprocessing', 'ensemble', 'explainability'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                    activeTab === tab
+                      ? 'bg-electric-cyan text-obsidian-950 shadow-md font-bold'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {tab === 'preprocessing' && '1. Preprocessing'}
+                  {tab === 'ensemble' && '2. Ensemble Architecture'}
+                  {tab === 'explainability' && '3. XAI Attribution'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Interactive Pipeline Stage Detail */}
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-block px-3 py-1 rounded-full text-[11px] font-mono text-electric-cyan bg-electric-cyan/10 border border-electric-cyan/20">
+                {tabContent[activeTab].badge}
+              </div>
+              <h4 className="text-2xl font-bold text-white">{tabContent[activeTab].title}</h4>
+              <p className="text-gray-300 text-sm leading-relaxed">{tabContent[activeTab].description}</p>
+              <div className="space-y-2.5 pt-2">
+                {tabContent[activeTab].points.map((pt, i) => (
+                  <div key={i} className="flex items-start gap-3 text-xs text-gray-300 p-3 rounded-xl bg-obsidian-900/70 border border-white/5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-electric-cyan mt-1.5 flex-shrink-0" />
+                    <span className="leading-relaxed">{pt}</span>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Architecture Visual Diagram */}
+            <div className="lg:col-span-5 p-6 rounded-2xl bg-obsidian-950/90 border border-white/10 space-y-3 font-mono text-xs">
+              <div className="text-[11px] text-gray-400 border-b border-white/10 pb-2 flex justify-between">
+                <span>PIPELINE_SCHEMATIC.xai</span>
+                <span className="text-electric-cyan">STATUS: VERIFIED</span>
+              </div>
+              <div className="space-y-2 pt-2 text-[11px]">
+                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-between text-gray-300">
+                  <span className="flex items-center gap-2"><Database size={12} className="text-electric-cyan" /> Sensor Head & Telemetry</span>
+                  <span className="text-gray-500">Inflow</span>
+                </div>
+                <div className="text-center text-gray-600">↓ Dynamic Recharge Normalization</div>
+                <div className="p-3 rounded-lg bg-indigo-500/[0.08] border border-indigo-500/20 text-indigo-300 space-y-1">
+                  <div className="font-bold flex items-center justify-between">
+                    <span>Heterogeneous Ensemble</span>
+                    <span className="text-[10px] text-indigo-400">3 Regressors</span>
+                  </div>
+                  <div className="text-[10px] text-gray-400">40% XGBoost + 35% LightGBM + 25% RF</div>
+                </div>
+                <div className="text-center text-gray-600">↓ Parallel SHAP TreeExplainer</div>
+                <div className="p-2.5 rounded-lg bg-electric-cyan/[0.08] border border-electric-cyan/20 text-electric-cyan flex items-center justify-between font-bold">
+                  <span>Classified Criticality Matrix</span>
+                  <span>Low / Med / Severe</span>
+                </div>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Pipeline Architecture Tabs */}
+        {/* SHAP Feature Importance Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass rounded-3xl p-8 mb-12"
+          className="rounded-3xl p-8 bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl space-y-6"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <Brain className="text-electric-purple" size={24} />
-            <h3 className="text-2xl font-bold">Pipeline Architecture</h3>
+          <div className="flex items-center justify-between border-b border-white/[0.06] pb-5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-electric-cyan/10 border border-electric-cyan/20 flex items-center justify-center text-electric-cyan">
+                <BarChart3 size={20} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white">Global Feature Importance (SHAP TreeExplainer)</h3>
+                <p className="text-xs text-gray-400 font-mono">Mean Absolute Contribution to Predicted Water Head</p>
+              </div>
+            </div>
+            <span className="text-xs font-mono text-gray-400 hidden sm:inline">N = 10,000+ Observations</span>
           </div>
 
-          {/* Tab Navigation */}
-          <div className="flex flex-wrap gap-3 mb-6">
-            {(['preprocessing', 'ensemble', 'explainability'] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-6 py-3 rounded-xl text-sm font-semibold transition-all ${
-                  activeTab === tab
-                    ? 'bg-gradient-to-r from-electric-cyan to-electric-purple text-obsidian-950'
-                    : 'glass glass-hover text-gray-300'
-                }`}
-              >
-                {tab === 'preprocessing' && '1. Preprocessing'}
-                {tab === 'ensemble' && '2. Ensemble'}
-                {tab === 'explainability' && '3. Explainability'}
-              </button>
-            ))}
-          </div>
-
-          {/* Tab Content */}
-          <div className="bg-obsidian-900 rounded-xl p-6">
-            <h4 className="text-xl font-bold text-electric-cyan mb-3">{tabContent[activeTab].title}</h4>
-            <p className="text-gray-300 mb-4">{tabContent[activeTab].description}</p>
-            <ul className="space-y-2">
-              {tabContent[activeTab].points.map((point, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-sm">
-                  <div className="w-1.5 h-1.5 bg-electric-purple rounded-full mt-2 flex-shrink-0" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </motion.div>
-
-        {/* SHAP Feature Importance Visualization */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass rounded-3xl p-8 mb-12"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <BarChart3 className="text-electric-cyan" size={24} />
-            <h3 className="text-2xl font-bold">SHAP Feature Importance</h3>
-          </div>
-
-          <div className="space-y-4">
-            {features.map((feature, idx) => (
-              <motion.div
-                key={feature.name}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                onMouseEnter={() => setHoveredFeature(feature.name)}
-                onMouseLeave={() => setHoveredFeature(null)}
-                className="relative"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold">{feature.name}</span>
-                  <span className="text-sm text-gray-400">{feature.value}%</span>
+          <div className="grid md:grid-cols-2 gap-4">
+            {features.map((feat) => (
+              <div key={feat.name} className="p-4 rounded-2xl bg-obsidian-900/80 border border-white/5 space-y-2">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-bold text-gray-200">{feat.name}</span>
+                  <span className="font-mono font-bold" style={{ color: feat.color }}>{feat.value}% impact</span>
                 </div>
-                <div className="relative h-8 bg-obsidian-900 rounded-lg overflow-hidden">
+                <div className="w-full h-2 rounded-full bg-white/[0.05] overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
-                    whileInView={{ width: `${feature.value}%` }}
+                    whileInView={{ width: `${feat.value}%` }}
                     viewport={{ once: true }}
-                    transition={{ duration: 1, delay: idx * 0.1, ease: 'easeOut' }}
-                    className="h-full rounded-lg transition-all"
-                    style={{ backgroundColor: feature.color }}
+                    transition={{ duration: 1, ease: 'easeOut' }}
+                    className="h-full rounded-full"
+                    style={{ backgroundColor: feat.color }}
                   />
                 </div>
-
-                {/* Tooltip */}
-                {hoveredFeature === feature.name && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute z-10 left-0 top-full mt-2 px-4 py-2 bg-obsidian-950 border border-white/20 rounded-lg text-sm max-w-md"
-                  >
-                    {featureDescriptions[feature.name]}
-                  </motion.div>
-                )}
-              </motion.div>
+                <p className="text-[11px] text-gray-400">{feat.desc}</p>
+              </div>
             ))}
           </div>
-        </motion.div>
 
-        {/* Metrics Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
-        >
-          {PORTFOLIO_DATA.flagshipProject.metrics.map((metric, idx) => (
-            <div key={idx} className="glass glass-hover rounded-2xl p-6 text-center">
-              <div className="text-3xl font-bold text-electric-cyan mb-2">{metric.value}</div>
-              <div className="text-sm text-gray-400">{metric.label}</div>
+          {/* Action Row */}
+          <div className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-2 text-xs">
+              {['Python 3.11', 'XGBoost', 'Scikit-Learn', 'SHAP', 'LIME', 'Pandas', 'Matplotlib'].map((tag) => (
+                <span key={tag} className="px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 text-gray-300">
+                  {tag}
+                </span>
+              ))}
             </div>
-          ))}
-        </motion.div>
-
-        {/* Tech Stack & Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center justify-between gap-6"
-        >
-          <div className="flex flex-wrap gap-2">
-            {PORTFOLIO_DATA.flagshipProject.techStack.map((tech, idx) => (
-              <span key={idx} className="px-4 py-2 rounded-full glass border border-white/10 text-sm">
-                {tech}
-              </span>
-            ))}
+            <a
+              href={PORTFOLIO_DATA.flagshipProject.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-electric-cyan to-indigo-500 text-obsidian-950 font-bold text-xs tracking-wide flex items-center gap-2 hover:scale-105 transition-transform shadow-[0_0_25px_rgba(0,245,212,0.3)]"
+            >
+              Inspect Source Repository on GitHub
+              <ExternalLink size={14} />
+            </a>
           </div>
-
-          <a
-            href={PORTFOLIO_DATA.flagshipProject.githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-electric-cyan to-electric-purple text-obsidian-950 font-semibold flex items-center gap-2 hover:scale-105 transition-transform shadow-lg"
-          >
-            View Repository on GitHub
-            <ExternalLink size={18} />
-          </a>
         </motion.div>
       </div>
     </section>
   );
 };
+
+export default FlagshipResearch;
